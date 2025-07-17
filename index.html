@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoicism Practice - Aplicație de Practică Stoică</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="container">
+            <div class="nav-brand">
+                <h1>Stoicism Practice</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active" data-section="home">Acasă</a></li>
+                <li><a href="#journal" class="nav-link" data-section="journal">Jurnal</a></li>
+                <li><a href="#exercises" class="nav-link" data-section="exercises">Exerciții</a></li>
+                <li><a href="#progress" class="nav-link" data-section="progress">Progres</a></li>
+                <li><a href="#resources" class="nav-link" data-section="resources">Resurse</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="container">
+                <div class="hero">
+                    <h2>Bine ai venit în practica stoicismului</h2>
+                    <p>Dezvoltă-ți virtuțile și găsește pacea interioară prin înțelepciunea stoică.</p>
+                </div>
+                
+                <div class="daily-quote card">
+                    <div class="card__body">
+                        <h3>Citat zilnic</h3>
+                        <blockquote id="quote-text">
+                            "Nu lucrurile ne tulbură, ci modul în care le privim."
+                        </blockquote>
+                        <cite id="quote-author">- Epictet</cite>
+                        <p id="quote-context">Manualul, despre dicotomia controlului</p>
+                        <button class="btn btn--primary" onclick="showQuoteReflection()">
+                            Reflectează asupra acestui citat
+                        </button>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <div class="action-grid">
+                        <div class="action-card card">
+                            <div class="card__body">
+                                <h4>Jurnal zilnic</h4>
+                                <p>Reflectează asupra zilei tale cu prompts stoice</p>
+                                <button class="btn btn--secondary" onclick="navigateToSection('journal')">
+                                    Începe să scrii
+                                </button>
+                            </div>
+                        </div>
+                        <div class="action-card card">
+                            <div class="card__body">
+                                <h4>Exerciții practice</h4>
+                                <p>Practică dicotomia controlului și alte tehnici</p>
+                                <button class="btn btn--secondary" onclick="navigateToSection('exercises')">
+                                    Explorează exercițiile
+                                </button>
+                            </div>
+                        </div>
+                        <div class="action-card card">
+                            <div class="card__body">
+                                <h4>Urmărește progresul</h4>
+                                <p>Vizualizează dezvoltarea ta spirituală</p>
+                                <button class="btn btn--secondary" onclick="navigateToSection('progress')">
+                                    Vezi progresul
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Journal Section -->
+        <section id="journal" class="section">
+            <div class="container">
+                <h2>Jurnal Stoic</h2>
+                
+                <div class="journal-prompt card">
+                    <div class="card__body">
+                        <h3>Întrebarea zilei</h3>
+                        <p id="daily-prompt">Ce am făcut bine astăzi?</p>
+                        <button class="btn btn--outline" onclick="changePrompt()">
+                            Schimbă întrebarea
+                        </button>
+                    </div>
+                </div>
+
+                <div class="journal-entry card">
+                    <div class="card__body">
+                        <h3>Reflecția ta</h3>
+                        <textarea id="journal-text" class="form-control" rows="6" 
+                                  placeholder="Scrie reflecțiile tale aici..."></textarea>
+                        <div class="journal-actions">
+                            <button class="btn btn--primary" onclick="saveJournalEntry()">
+                                Salvează intrarea
+                            </button>
+                            <button class="btn btn--secondary" onclick="clearJournalEntry()">
+                                Șterge textul
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="journal-history">
+                    <h3>Intrări recente</h3>
+                    <div id="journal-entries" class="journal-entries-list">
+                        <!-- Journal entries will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercises Section -->
+        <section id="exercises" class="section">
+            <div class="container">
+                <h2>Exerciții Stoice</h2>
+                
+                <div class="exercises-grid">
+                    <div class="exercise-card card" data-exercise="dichotomy_control">
+                        <div class="card__body">
+                            <h3>Dicotomia Controlului</h3>
+                            <p>Distinge între ceea ce stă în puterea ta și ceea ce nu stă</p>
+                            <button class="btn btn--primary" onclick="startExercise('dichotomy_control')">
+                                Începe exercițiul
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card card" data-exercise="praemeditatio_malorum">
+                        <div class="card__body">
+                            <h3>Praemeditatio Malorum</h3>
+                            <p>Vizualizarea negativă pentru pregătirea mentală</p>
+                            <button class="btn btn--primary" onclick="startExercise('praemeditatio_malorum')">
+                                Începe exercițiul
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card card" data-exercise="memento_mori">
+                        <div class="card__body">
+                            <h3>Memento Mori</h3>
+                            <p>Amintește-ți că vei muri pentru a aprecia prezentul</p>
+                            <button class="btn btn--primary" onclick="startExercise('memento_mori')">
+                                Începe exercițiul
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card card" data-exercise="view_from_above">
+                        <div class="card__body">
+                            <h3>Vederea de Sus</h3>
+                            <p>Privește problemele din perspectivă cosmică</p>
+                            <button class="btn btn--primary" onclick="startExercise('view_from_above')">
+                                Începe exercițiul
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-card card" data-exercise="gratitude_practice">
+                        <div class="card__body">
+                            <h3>Gratitudine Activă</h3>
+                            <p>Reflectează asupra lucrurilor pentru care ești recunoscător</p>
+                            <button class="btn btn--primary" onclick="startExercise('gratitude_practice')">
+                                Începe exercițiul
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise Modal -->
+                <div id="exercise-modal" class="modal">
+                    <div class="modal-content card">
+                        <div class="card__body">
+                            <h3 id="exercise-title"></h3>
+                            <p id="exercise-description"></p>
+                            <div id="exercise-instructions"></div>
+                            <textarea id="exercise-reflection" class="form-control" rows="4" 
+                                      placeholder="Reflectează asupra acestui exercițiu..."></textarea>
+                            <div class="modal-actions">
+                                <button class="btn btn--primary" onclick="completeExercise()">
+                                    Completează exercițiul
+                                </button>
+                                <button class="btn btn--secondary" onclick="closeExerciseModal()">
+                                    Închide
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progress" class="section">
+            <div class="container">
+                <h2>Progresul tău</h2>
+                
+                <div class="progress-stats">
+                    <div class="stat-card card">
+                        <div class="card__body">
+                            <h3>Zile consecutive</h3>
+                            <div class="stat-number" id="streak-days">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card card">
+                        <div class="card__body">
+                            <h3>Exerciții completate</h3>
+                            <div class="stat-number" id="exercises-completed">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card card">
+                        <div class="card__body">
+                            <h3>Intrări în jurnal</h3>
+                            <div class="stat-number" id="journal-entries-count">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-tracker card">
+                    <div class="card__body">
+                        <h3>Tracker de obiceiuri</h3>
+                        <div class="habits-list" id="habits-list">
+                            <!-- Habits will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievements card">
+                    <div class="card__body">
+                        <h3>Realizări</h3>
+                        <div id="achievements-list" class="achievements-list">
+                            <!-- Achievements will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="section">
+            <div class="container">
+                <h2>Resurse pentru studiu</h2>
+                
+                <div class="resources-grid">
+                    <div class="resource-category card">
+                        <div class="card__body">
+                            <h3>Cărți recomandate</h3>
+                            <div class="resource-list">
+                                <div class="resource-item">
+                                    <h4>The Daily Stoic</h4>
+                                    <p>Ryan Holiday</p>
+                                    <small>Reflecții zilnice, ideal pentru începători</small>
+                                </div>
+                                <div class="resource-item">
+                                    <h4>Manualul (Enchiridion)</h4>
+                                    <p>Epictet</p>
+                                    <small>Esențele filosofiei stoice în aforisme</small>
+                                </div>
+                                <div class="resource-item">
+                                    <h4>Scrisori către Lucilius</h4>
+                                    <p>Seneca</p>
+                                    <small>Sfaturi practice despre viață și timp</small>
+                                </div>
+                                <div class="resource-item">
+                                    <h4>Meditations</h4>
+                                    <p>Marcus Aurelius</p>
+                                    <small>Jurnalul personal al împăratului-filosof</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-category card">
+                        <div class="card__body">
+                            <h3>Podcasturi</h3>
+                            <div class="resource-list">
+                                <div class="resource-item">
+                                    <h4>The Daily Stoic Podcast</h4>
+                                    <small>Episoade scurte, aplicabile zilnic (5-10 min)</small>
+                                </div>
+                                <div class="resource-item">
+                                    <h4>Stoic Coffee Break</h4>
+                                    <small>Lecții practice pe teme emoționale</small>
+                                </div>
+                                <div class="resource-item">
+                                    <h4>Practical Stoicism</h4>
+                                    <small>Dezbateri și concepte în profunzime</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-category card">
+                        <div class="card__body">
+                            <h3>Ghid pentru începători</h3>
+                            <div class="beginner-guide">
+                                <h4>Începe cu aceste pași:</h4>
+                                <ol>
+                                    <li>Citește câte un citat zilnic și reflectează asupra lui</li>
+                                    <li>Practică dicotomia controlului în situații stresante</li>
+                                    <li>Scrie în jurnal în fiecare seară</li>
+                                    <li>Încearcă exercițiul de gratitudine zilnic</li>
+                                    <li>Studiază textele clasice treptat</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
